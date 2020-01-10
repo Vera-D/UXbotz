@@ -13,22 +13,52 @@ concept:(hello) [hello hi hey "good morning" greetings]
 concept:(bye) [bye goodbye "bye bye" "tata" "see you" adios cheerio "so long" farewell "have a nice day"]
 
 
-# Start/Wait animation, Goto.
-# If User expresses a word or a sentence found in the concept "hello",
-# the robot starts Hey_1 animation, answers a random value defined in concept "hello"
-# and waits for the end of the animation before going to the label how. Label is expressed this way: %howAreYou
-u:(e:onStart) \rspd=90\ $html="intro.html" ~hello  \pau=300\ I am Pepper \pau=300\ and I am representing the U X botz team at Tampere University. \pau=300\ What are you doing to make sure your plastic is being recycled? \pau=300\ well, \pau=300\ plastic pollution is a huge problem \pau=300\ ^start(boston_animation_library/Stand/little_laugh) ^wait(boston_animation_library/Stand/little_laugh)\pau=300\ Can you take a survey.  ^gotoReactivate(landing_page)
-  
-    
-proposal: %landing_page $html="landing_page.html" 
-proposal: %pledge_page $html="pledges.html" 
-proposal: %question_page $html="question.html" 
-proposal: %survey1_page $html="survey1.html" 
-proposal: %survey1view2_page $html="survey1view2.html" 
+# Start application
+proposal: %start \rspd=90\ $html="index.html" ~hello  \pau=300\ I am Pepper \pau=300\ and I am representing the U X botz team at Tampere University. 
+\pau=300\ What are you doing to make sure your plastic is being recycled? \pau=300\ well, \pau=300\ plastic pollution is a huge problem \pau=300\ 
+^start(boston_animation_library/Stand/little_laugh) ^wait(boston_animation_library/Stand/little_laugh)\pau=300\  
+^gotoReactivate(startsurvey)
+u:(e:onStart) ^gotoReactivate(start)
 
- u:(e:orientation/click $orientation/click==recycleYes) \rspd=90\ $html="question.html" You chose Yes! \pau=300\ Great glad to hear  ^gotoReactivate(survey1)
- 
- u:(e:orientation/click $orientation/click==recycleNo) \rspd=90\ $html="no.html" I am sad to hear that, give me one minute to have you reconsider $html="survey1view2.html"
+
+# Start survey
+proposal: %startSurvey $html="startsurvey.html" Hello, would you like to take part, in an informative survey. \pau=1000\ It will take only about 6 minutes. 
+\pau=1000\ 
+
+# Yes
+u:(yes) gotoReactivate(recycle)
+u:(e:orientation/click $orientation/click==surveyYes) ^gotoReactivate(recycle)
+# No
+u:(yes) gotoReactivate(surveyNo)
+u:(e:orientation/click $orientation/click==surveyNo) ^gotoReactivate(surveyNo)
+
+
+# Are you sure you want to quit?
+proposal: %surveyNo $html="surveyno.html" Are you sure? \pau=1500\ This won’t take much of your time, and you can learn new things. \pau=1000\
+
+#Yes
+u:(yes) Alright. \pau=5000\ ^gotoReactivate(start)
+u:(e:orientation/click $orientation/click==sureYes) Alright. \pau=5000\ ^gotoReactivate(start)
+#No
+u:(yes) Nice! \pau=5000\ ^gotoReactivate()
+u:(e:orientation/click $orientation/click==sureYes) Alright. \pau=5000\ ^gotoReactivate(start)
+
+
+# Recycling
+proposal: %recycle Awesome! Let’s start. \pau=1000\ I am interested in your thoughts, on, environmental issues. \pau=1000\ $html="recycle.html" 
+My first question is, do you recycle plastics. \pau=1000\
+
+# Yes
+proposal: %recycleYes \rspd=90\ Awesome! \pau=1000\ Plastic recycling, is important. I will tell you more about why that is. \pau=1000\ 
+ u:(yes) ^gotoReactivate(recycleYes)
+ u:(e:orientation/click $orientation/click==recycleYes) ^gotoReactivate(recycleYes)
+ # No
+ proposal: %recycleNo \rspd=90\ Allright. No worries. I will tell you more about plastic. \pau=1000\
+ u:(yes) gotoReactivate(recycleNo)
+ u:(e:orientation/click $orientation/click==recycleNo) ^gotoReactivate(recycleNo)
+
+
+
  
 
 

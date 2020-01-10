@@ -15,18 +15,17 @@
 		<link href="site/web-fonts-with-css/css/fontawesome-all.min.css" rel="stylesheet">
 	</head>	
 
-<body class="background-carbage">	
+<body style="background-color: black;">	
 	<header>
-		<h1>
-			
-			<div onclick="window.location.href = 'landing_page.html';">Do you recycle plastics?</div>
+		<h1>			
+			<div>Text: Please take part in a quick survey.</div>
 		</h1>
 	</header>
 
 		<div class="button-container">
-			<div onclick="window.location.href = 'survey1.html';" class=button>Yes</div>
+			<div onclick="submitAnswer(surveyYes)" class=button>Yes</div>
 			<div class="button-divider"></div>
-			<div onclick="window.location.href = 'no.html';" class=button>No</div>
+			<div onclick="submitAnswer(surveyNo)" class=button>No</div>
 		</div>	
 
 

@@ -15,47 +15,37 @@
 		<link href="site/web-fonts-with-css/css/fontawesome-all.min.css" rel="stylesheet">
 	</head>	
 
-<body bgcolor="#000000">	
+<body style="background-color: black;">	
 	<header>
-		<h1>
-			Did you know?
+		<h1>			
+			<div>Are you sure?</div>
 		</h1>
 	</header>
-		<div class="padding50"></div>
-		
-		<pic >
-			
-			<img  class="Example" src="../../images/bird2.jpg" alt="" />
-			
-		</pic>
-		
+
 		<div class="button-container">
-			
-			<!--Controls-->
-			<div class="padding300"></div>
-				
-				<aButton class="previous round" onclick="window.location.href = 'question.html';"><i class="fas fa-angle-left fa-3x pr-3"></i></aButton>
-				
-				<div class="button-divider3"></div>
-
-				<aButton href="survey1view2.html" class="next round"  onclick="window.location.href = 'survey1view2.html';"><i class="fas fa-angle-right fa-3x pl-3"></i></aButton>	
-			
-
-			</div>	
-
-			
-			
-			
-			<!--/.Controls-->
-		
-		
-  
+			<div onclick="submitAnswer(exitsurvey)" class=button>Yes</div>
+			<div class="button-divider"></div>
+			<div onclick="submitAnswer(continuesurvey)" class=button>No</div>
 		</div>	
 
 
+<script>		
+			var session = new QiSession();
+			var audio = new Audio('../change_screen.ogg');
 
-
-
-
+			function submitAnswer(answer){
+				audio.play();
+				session.service('ALMemory').done(function(ALMemory) {
+				ALMemory.raiseEvent("orientation/click", answer);
+				});
+			}
+			
+			function exit(){
+				audio.play();
+				session.service('ALMemory').done(function(ALMemory) {
+				ALMemory.raiseEvent("orientation/landing_page","landing_page.html");
+				});
+			}
+</script>
 </body>
 </html>
