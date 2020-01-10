@@ -1,0 +1,69 @@
+<!doctype html>
+	<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fi" lang="fi">
+	<head>
+			<meta charset="utf-8">
+			<title>Plasticrobot</title>
+			<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+			<meta content='width=1280, user-scalable=0' name='viewport' />
+			<script src="/libs/qimessaging/1.0/qimessaging.js"></script>
+		
+	<link href="https://fonts.googleapis.com/css?family=Abril+Fatface|Ubuntu" rel="stylesheet"> 
+		<link rel="manifest" href="<?= SITEPATH ?>img/ico/manifest.json">
+		<link href="site/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+		<link href="site/css/style.css" rel="stylesheet" type="text/css">	
+		<script src="site/js/bootstrap.min.js"></script>
+		<link href="site/web-fonts-with-css/css/fontawesome-all.min.css" rel="stylesheet">
+	</head>	
+
+<body bgcolor="#000000">		
+
+		 
+		  <div class="column col-md-2">
+		  
+		  <h1> <font color="white"> How do you feel seeing this image, how often do you recycle your plastic?</font></h1>
+		  </div>
+		  
+		  <div class="column">
+			<pic >
+			
+				<img  class="Example" src="../../images/bird2.jpg" alt="" />
+			
+			</pic>		  
+		  </div>
+		
+		<div class="button-container2">
+			<div onclick="submitAnswer(recycleYes)" class=button>1</div>
+			<div class="button-divider2"></div>
+			<div onclick="submitAnswer(recycleNo)" class=button>2</div>
+			<div class="button-divider2"></div>
+			<div onclick="submitAnswer(recycleNo)" class=button>3</div>
+			<div class="button-divider2"></div>
+			<div onclick="submitAnswer(recycleNo)" class=button>4</div>
+			<div class="button-divider2"></div>
+			<aButton href="survey1view2.html" class="next round"  onclick="window.location.href = 'survey1.html';"><i class="fas fa-angle-right fa-3x pl-3"></i></aButton>	
+		</div>	
+	
+
+<script>		
+			var session = new QiSession();
+			var audio = new Audio('../change_screen.ogg');
+
+			function submitAnswer(answer){
+				audio.play();
+				session.service('ALMemory').done(function(ALMemory) {
+				ALMemory.raiseEvent("orientation/click", answer);
+				});
+			}
+			
+			function exit(){
+				audio.play();
+				session.service('ALMemory').done(function(ALMemory) {
+				ALMemory.raiseEvent("orientation/landing_page","landing_page.html");
+				});
+			}
+</script>
+
+	
+
+</body>
+</html>

@@ -1,0 +1,48 @@
+FUNCTION_BUTTONS=
+{
+    
+    
+    "button6": {
+        "icon": "glyphicon  icon-restaurantmenu",
+        "translations": {
+            "English": "All menu",
+       
+        }
+    },
+	"button7": {
+        "icon": "glyphicon icon-store",
+        "translations": {
+            "English": "Reaktori",
+         
+        }
+    },
+	"button8": {
+        "icon": "glyphicon icon-store",
+        "translations": {
+            "English": "Newton",
+       
+        }
+    },
+	"button9": {
+        "icon": "glyphicon icon-store",
+        "translations": {
+            "English": "Konehuone",
+        
+        }
+    },
+	"button10": {
+        "icon": "glyphicon icon-store",
+        "translations": {
+            "English": "Hertzi",
+           
+        }
+    },
+	
+	"button12": {
+        "icon": "glyphicon icon-store",
+        "translations": {
+            "English": "Taco House",
+           
+        }
+    }
+}
