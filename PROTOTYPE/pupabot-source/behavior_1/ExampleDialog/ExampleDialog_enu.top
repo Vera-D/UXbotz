@@ -19,6 +19,7 @@ proposal: %start \rspd=90\ $html="index.html" ~hello  \pau=300\ I am Pepper \pau
 ^start(boston_animation_library/Stand/little_laugh) ^wait(boston_animation_library/Stand/little_laugh)\pau=300\  
 ^gotoReactivate(startsurvey)
 u:(e:onStart) ^gotoReactivate(start)
+u:(e:orientation/click $orientation/click==startSurvey)
 
 
 # Start survey
@@ -37,26 +38,58 @@ u:(e:orientation/click $orientation/click==surveyNo) ^gotoReactivate(surveyNo)
 proposal: %surveyNo $html="surveyno.html" Are you sure? \pau=1500\ This won’t take much of your time, and you can learn new things. \pau=1000\
 
 #Yes
-u:(yes) Alright. \pau=5000\ ^gotoReactivate(start)
-u:(e:orientation/click $orientation/click==sureYes) Alright. \pau=5000\ ^gotoReactivate(start)
+u:(yes) Alright. \pau=5000\ Alright. \pau=5000\ ^gotoReactivate(sadface)
+u:(e:orientation/click $orientation/click==sureYes) Alright. \pau=5000\ ^gotoReactivate(sadface)
 #No
-u:(yes) Nice! \pau=5000\ ^gotoReactivate()
-u:(e:orientation/click $orientation/click==sureYes) Alright. \pau=5000\ ^gotoReactivate(start)
+u:(yes) Nice! \pau=5000\ ^gotoReactivate(recycle)
+u:(e:orientation/click $orientation/click==sureYes) Alright. \pau=5000\ ^gotoReactivate(recycle)
+
+
+# Sad face
+ proposal: %sadface $html="sadface.html" 
 
 
 # Recycling
-proposal: %recycle Awesome! Let’s start. \pau=1000\ I am interested in your thoughts, on, environmental issues. \pau=1000\ $html="recycle.html" 
+proposal: %recycle $html="recycle.html" Awesome! Let’s start. \pau=1000\ I am interested in your thoughts, on, environmental issues. \pau=1000\ $html="recycle.html" 
 My first question is, do you recycle plastics. \pau=1000\
 
 # Yes
 proposal: %recycleYes \rspd=90\ Awesome! \pau=1000\ Plastic recycling, is important. I will tell you more about why that is. \pau=1000\ 
+^gotoReactivate(problem)
  u:(yes) ^gotoReactivate(recycleYes)
  u:(e:orientation/click $orientation/click==recycleYes) ^gotoReactivate(recycleYes)
  # No
- proposal: %recycleNo \rspd=90\ Allright. No worries. I will tell you more about plastic. \pau=1000\
- u:(yes) gotoReactivate(recycleNo)
+ proposal: %recycleNo \rspd=90\ Allright. No worries. I will tell you more about plastic. \pau=1000\ ^gotoReactivate(problem)
+ u:(yes) ^gotoReactivate(recycleNo)
  u:(e:orientation/click $orientation/click==recycleNo) ^gotoReactivate(recycleNo)
 
+
+ # Problem
+ proposal: %problem html="problem.html" As you must already know, plastic is an essential part of our economy. \pau=800\ 
+ Yet, plastic can have a serious effect on our health, and our environment. \pau=800\ Plastic pollution has become one of the most 
+ pressing environmental issues. \pau=1000\
+
+
+# Microplastic part 1
+Proposal: %microplastics1 html="microplastics1.html" Did you know that plastics can be found in small sizes, known as microplastics.\pau=800\ 
+Microplastics are very small particles of plastic material \pau=400\ like this. \pau=1000\ html="microplastics2.html"
+
+# TODO 2->. Maybe some of them could be left out for shorter dialog time. Basically just copy microplastic1 page and change background image
+
+
+# Microplastics question
+proposal: %problem html="microplastics-question.html" What concerns you most, about microplastics? \pau=1000\
+
+# DangersToHealth
+Proposal: %danger This is a good thing to be concerned about. \pau=800\ There is still much we don’t know, about health issues related to plastics. 
+\pau=800\ After all, most plastic has been produced only in the past 15 years. \pau=1000\ Let’s move on. \pau=1000\
+u:(e:orientation/click $orientation/click==danger) ^gotoReactivate(danger)
+# Environmental pollution
+Proposal: %pollution Environmental pollution is a serious concern, \pau=400\ How, are we ever going to get rid of all that plastic, in the environment. 
+\pau=1000\ \pau=1000\ Let’s move on. \pau=1000\
+u:(e:orientation/click $orientation/click==pollution) ^gotoReactivate(pollution)
+# Both TODO dialog!!!!
+u:(e:orientation/click $orientation/click==both) ^gotoReactivate(both)
 
 
  
