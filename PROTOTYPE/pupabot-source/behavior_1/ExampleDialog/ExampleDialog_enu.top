@@ -11,6 +11,12 @@ concept:(repeat) [repeat understand]
 concept:(thx) ["thank you" thanks gracias "much obliged" merci]
 concept:(hello) [hello hi hey "good morning" greetings]
 concept:(bye) [bye goodbye "bye bye" "tata" "see you" adios cheerio "so long" farewell "have a nice day"]
+concept:(danger) [danger health]
+concept:(pollution) [environmental pollution]
+concept:(both) [both each all]
+concept:(responsibleNations) [nations let happen]
+concept:(nations) ["all nations" world]
+concept:(investors) [private investors]
 
 
 # Start application
@@ -65,31 +71,79 @@ proposal: %recycleYes \rspd=90\ Awesome! \pau=1000\ Plastic recycling, is import
 
 
  # Problem
- proposal: %problem html="problem.html" As you must already know, plastic is an essential part of our economy. \pau=800\ 
+ proposal: %problem $html="problem.html" As you must already know, plastic is an essential part of our economy. \pau=800\ 
  Yet, plastic can have a serious effect on our health, and our environment. \pau=800\ Plastic pollution has become one of the most 
  pressing environmental issues. \pau=1000\
 
 
-# Microplastic part 1
-Proposal: %microplastics1 html="microplastics1.html" Did you know that plastics can be found in small sizes, known as microplastics.\pau=800\ 
-Microplastics are very small particles of plastic material \pau=400\ like this. \pau=1000\ html="microplastics2.html"
-
-# TODO 2->. Maybe some of them could be left out for shorter dialog time. Basically just copy microplastic1 page and change background image
+# Microplastic dialogs
+# Part 1
+Proposal: %microplastics1 $html="microplastics1.html" Did you know that plastics can be found in small sizes, known as microplastics.\pau=800\ 
+Microplastics are very small particles of plastic material \pau=400\ like this. \pau=1000\ ^gotoReactivate/microplastics2)
+# Part 2
+proposal: %microplastics2 $html="microplastics2.html" Microplastics are created by the plastic industry. \pau=800\ Did you know, 
+they are used in some cosmetics, \pau=400\ detergents, \pau=400\ cleaning products, \pau=400\ paints, \pau=400\ even synthetic clothing. \pau=1000\ 
+^gotoReactivate(microplastics3)
+# Part 3
+proposal: %microplastics3 $html="microplastics3.html" Some microplastics are formed unintentionally, when wasted plastics break down in the environment. 
+\pau=1000\ ^gotoReactivate(microplastics4)
+# Part 4
+proposal: %microplastics4 $html="microplastics4.html" Microplastics are breaking down further, into smaller and smaller pieces. \pau=800\ 
+Plastic microfibers have been found in, drinking water, and even drifting through the air. \pau=1000\ ^gotoReactivate(microplastics5)
+# Part 5
+proposal: %microplastics5 $html="microplastics5.html" Microplastics have spread everywhere on Earth. \pau=800\ 
+They can even be found in the snows of Arctic. \pau=1000\ ^gotoReactivate(microplastics6)
+# Part 6
+proposal: %microplastics6 $html="microplastics6.html" Some plastics contain hazardous chemicals, that can have a negative impact on nature, 
+or human health. \pau=1000\ ^gotoReactivate(microplasticsQuestion)
 
 
 # Microplastics question
-proposal: %problem html="microplastics-question.html" What concerns you most, about microplastics? \pau=1000\
+proposal: %microplasticsQuestion $html="microplastics-question.html" What concerns you most, about microplastics? \pau=1000\
 
 # DangersToHealth
 Proposal: %danger This is a good thing to be concerned about. \pau=800\ There is still much we don’t know, about health issues related to plastics. 
-\pau=800\ After all, most plastic has been produced only in the past 15 years. \pau=1000\ Let’s move on. \pau=1000\
+\pau=800\ After all, most plastic has been produced only in the past 15 years. \pau=1000\ Let’s move on. \pau=1000\ ^gotoReactivate(carbagepatch)
 u:(e:orientation/click $orientation/click==danger) ^gotoReactivate(danger)
+u:(danger) ^gotoReactivate(danger)
 # Environmental pollution
 Proposal: %pollution Environmental pollution is a serious concern, \pau=400\ How, are we ever going to get rid of all that plastic, in the environment. 
-\pau=1000\ \pau=1000\ Let’s move on. \pau=1000\
+\pau=1000\ \pau=1000\ Let’s move on. \pau=1000\ ^gotoReactivate(carbagepatch)
 u:(e:orientation/click $orientation/click==pollution) ^gotoReactivate(pollution)
+u:(pollution) ^gotoReactivate(pollution)
 # Both TODO dialog!!!!
 u:(e:orientation/click $orientation/click==both) ^gotoReactivate(both)
+u:(pollution) ^gotoReactivate(pollution)
+
+
+# Garbage patches
+Proposal: %garbagepatch $html="carbagepatch.html" in the North Pacific Ocean, garbage and plastic debris, has accumulated into something called 
+\pau=300\ The Great Pacific Garbage Patch \pau=900\ It spans from North America to Japan \pau=800\ And, because this vortex of trash, is so far from any 
+coast, no nation will take responsibility, or provide funding, to clean it up. \pau=1000\ ^gotoReactivate(cleanup)
+
+
+# Clean up dialog
+Proposal: %cleanup  $html="cleanup.html" however, there is a project that has received funding \pau=900\ the Ocean Clean Up  project aims 
+to clean 90 % of ocean plastic \pau=900\ they have designed a system that catches plastic from the ocean with a floating barrier \pau=1000\
+^gotoReactivate(cleanupQuestion)
+
+
+# Cleanup question
+proposal: %cleanupQuestion $html="cleanup-question.html" Now \pau=700\ in your opinion \pau=600\who, should pay for these kinds of projects 
+\pau=1000\ \pau=1000\
+
+# Responsible nations
+Proposal: %responsibleNations Indeed, why aren’t the nations held responsible \pau=1000\
+u:(e:orientation/click $orientation/click==danger) ^gotoReactivate(responsibleNations)
+u:(responsibleNations) ^gotoReactivate(responsibleNations)
+# All nations
+Proposal: %nations Indeed, why don’t all nations contribute to clean up the ocean \pau=1000\
+u:(e:orientation/click $orientation/click==pollution) ^gotoReactivate(nations)
+u:(nations) ^gotoReactivate(nations)
+# Private investors
+Proposal: %investors Good idea, private investors can help \pau=1000\
+u:(e:orientation/click $orientation/click==both) ^gotoReactivate(investors)
+u:(pollution) ^gotoReactivate(investors)
 
 
  
