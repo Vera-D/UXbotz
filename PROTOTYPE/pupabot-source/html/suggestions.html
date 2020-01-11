@@ -15,38 +15,20 @@
 		<link href="site/web-fonts-with-css/css/fontawesome-all.min.css" rel="stylesheet">
 	</head>	
 
-<body class="background-carbage">	
-	<header>
-		<h1>			
-			<div>Do you recycle plastics?</div>
-		</h1>
-	</header>
-
-		<div class="button-container">
-			<div onclick="submitAnswer(recycleYes, 1)" class=button>Yes</div>
-			<div class="button-divider"></div>
-			<div onclick="submitAnswer(recycleNo, 0)" class=button>No</div>
-		</div>	
-
-
-<script>		
-			var session = new QiSession();
-			var audio = new Audio('../change_screen.ogg');
-
-			function submitAnswer(answer, recycles){
-				sessionStorage.setItem("isRecycling", recycles);
-				audio.play();
+	<body onload="getRecycleInformation" bgcolor="#000000" style="background-image: url(images/blackboard.jpg);">	
+		<header>
+			<h1>
+				Microplastics
+			</h1>
+		</header>
+		<script>
+			// Raising click event to send recycling yes/no to the dialog
+			function getRecycleInformation() {
+				var result = sessionStorage.getItem("isRecycling");
 				session.service('ALMemory').done(function(ALMemory) {
-				ALMemory.raiseEvent("orientation/click", answer);
+				ALMemory.raiseEvent("orientation/click", result);
 				});
 			}
-			
-			function exit(){
-				audio.play();
-				session.service('ALMemory').done(function(ALMemory) {
-				ALMemory.raiseEvent("orientation/landing_page","landing_page.html");
-				});
-			}
-</script>
-</body>
-</html>
+		</script>
+	</body>
+	</html>

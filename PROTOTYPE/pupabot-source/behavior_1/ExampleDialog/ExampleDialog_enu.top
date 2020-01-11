@@ -133,17 +133,60 @@ proposal: %cleanupQuestion $html="cleanup-question.html" Now \pau=700\ in your o
 \pau=1000\ \pau=1000\
 
 # Responsible nations
-Proposal: %responsibleNations Indeed, why aren’t the nations held responsible \pau=1000\
+Proposal: %responsibleNations Indeed, why aren’t the nations held responsible \pau=1000\ ^gotoReactivate(suggestions)
 u:(e:orientation/click $orientation/click==danger) ^gotoReactivate(responsibleNations)
 u:(responsibleNations) ^gotoReactivate(responsibleNations)
 # All nations
-Proposal: %nations Indeed, why don’t all nations contribute to clean up the ocean \pau=1000\
+Proposal: %nations Indeed, why don’t all nations contribute to clean up the ocean \pau=1000\ ^gotoReactivate(suggestions)
 u:(e:orientation/click $orientation/click==pollution) ^gotoReactivate(nations)
 u:(nations) ^gotoReactivate(nations)
 # Private investors
-Proposal: %investors Good idea, private investors can help \pau=1000\
+Proposal: %investors Good idea, private investors can help \pau=1000\ ^gotoReactivate(suggestions)
 u:(e:orientation/click $orientation/click==both) ^gotoReactivate(investors)
 u:(pollution) ^gotoReactivate(investors)
+
+
+# Suggestions
+Proposal: %suggestions $html="suggestions.html" 
+
+# Recycles already
+Proposal: %suggestionsYes Now that I have told you about the problems with plastic \pau=600\ I have some suggestions that you can do to help \pau=800\ 
+my suggestions are, for example, you can choose products, that do not use so much  plastic wrapping \pau=800\ Consider the life cycle of a product, 
+and make sure, it does not end up as waste \pau=800\ and remember, of course, to keep recycling, as you already have done \pau=1000\ 
+^gotoReactivate(pledges)
+u:(e:orientation/click $orientation/click==1) ^gotoReactivate(suggestionsYes)
+# Does not recycle
+Proposal: %suggestionsNo Now that I have told you about the problems with plastic \pau=600\ I have some suggestions that you can do to help \pau=800\ my suggestions are, 
+for example, you can choose products, that do not use so much  plastic wrapping \pau=800\ Consider the life cycle of a product, and make sure, 
+it does not end up as waste \pau=800\ I also suggest you start recycling plastics \pau=1000\
+^gotoReactivate(pledges)
+u:(e:orientation/click $orientation/click==0) ^gotoReactivate(suggestionsNo)
+
+
+# Pledges
+Proposal: %pledges $html="pledges.html" please, would you make a pledge today \pau=800\ here are options \pau=800\ please choose, 
+and commit to one! \pau=800\ Select your pledge from my tablet below \pau=1000\
+
+# Pledge 1
+u:(e:orientation/click $orientation/click==pledge1) you have chosen to start recycling plastic \pau=400\ this is great \pau=800\ you should be able 
+to find a plastic recycling point near your house \pau=800\ if there isn’t one, take steps to request one \pau=1000\ Thank you for making a pledge today! 
+\pau=800\ ^gotoReactivate(end)
+# Pledge 2
+u:(e:orientation/click $orientation/click==pledge2)
+you have chosen, to refuse single-use plastics and packing. Thank you! \pau=800\ since the customer is always right, industry will eventually have to 
+take more steps, to offer alternatives to single-use plastics. \pau=1000\ thank you for making a pledge today! \pau=800\ 
+ ^gotoReactivate(end)
+# Pledge 3
+u:(e:orientation/click $orientation/click==pledge3) you have chosen to refuse products, that include micro plastics\pau=800\ this is a good action for 
+the environment \pau=1000\ thank you for making a pledge today! \pau=800\   ^gotoReactivate(end)
+# Pledge 4
+u:(e:orientation/click $orientation/click==pledge4)you have chosen to pass this information to other people \pau=800\ this is very important, 
+because people need to know more about the problems related to plastics \pau=800\ thank you for making a pledge today! pau=800\   ^gotoReactivate(end)
+
+
+# End
+Proposal: %end html="end.html" Thank you for participating this survey \pau=800\ have a nice day \pau=5000\ gotoReactivate(start)
+\pau=1000\
 
 
  
