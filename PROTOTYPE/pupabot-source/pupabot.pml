@@ -56,16 +56,38 @@
         <File name="fa-solid-900" src="html/site/web-fonts-with-css/webfonts/fa-solid-900.ttf" />
         <File name="fa-solid-900" src="html/site/web-fonts-with-css/webfonts/fa-solid-900.woff" />
         <File name="fa-solid-900" src="html/site/web-fonts-with-css/webfonts/fa-solid-900.woff2" />
-        <File name="landing_page" src="html/landing_page.html" />
-        <File name="question" src="html/question.html" />
+        <File name="index" src="html/index.html" />
+        <File name="cleanup-question" src="html/cleanup-question.html" />
+        <File name="cleanup" src="html/cleanup.html" />
+        <File name="end" src="html/end.html" />
+        <File name="garbagepatch" src="html/images/garbagepatch.jpg" />
+        <File name="microplastics-question" src="html/site/microplastics-question.html" />
+        <File name="microplastics1" src="html/site/microplastics1.html" />
+        <File name="microplastics2" src="html/site/microplastics2.html" />
+        <File name="microplastics3" src="html/site/microplastics3.html" />
+        <File name="microplastics4" src="html/site/microplastics4.html" />
+        <File name="microplastics5" src="html/site/microplastics5.html" />
+        <File name="microplastics6" src="html/site/microplastics6.html" />
+        <File name="problem" src="html/images/problem.jpg" />
         <File name="pledges" src="html/pledges.html" />
+        <File name="recycle" src="html/recycle.html" />
+        <File name="sadface" src="html/sadface.html" />
+        <File name="startsurvey" src="html/startsurvey.html" />
+        <File name="suggestions" src="html/suggestions.html" />
         <File name="exclamation-point" src="html/images/exclamation-point.png" />
-        <File name="garbage-plastic" src="html/images/garbage-plastic.jpg" />
+        <File name="blackboard" src="html/images/blackboard.jpg" />
+        <File name="cleanup1" src="html/images/cleanup1.png" />
+        <File name="cleanup2" src="html/images/cleanup2.jpeg" />
+        <File name="carbagepatch" src="html/images/carbagepatch.jpg" />
+        <File name="microplastic1" src="html/images/microplastic1.png" />
+        <File name="microplastic2" src="html/images/microplastic2.png" />
+        <File name="microplastic3" src="html/images/microplastic3.jpg" />
+        <File name="microplastic4" src="html/images/microplastic4.jfif" />
+        <File name="microplastic5" src="html/images/microplastic5.jpg" />
+        <File name="microplastic6" src="html/images/microplastic6.jpg" />
         <File name="pollution" src="html/images/pollution.jpg" />
-        <File name="example" src="html/site/example.html" />
-        <File name="no" src="html/no.html" />
-        <File name="survey1" src="html/survey1.html" />
-        <File name="survey1view2" src="html/survey1view2.html" />
+        <File name="sadface1" src="html/images/sadface1.png" />
+        <File name="thank-you" src="html/images/thank-you.jpg" />
     </Resources>
     <Topics>
         <Topic name="ExampleDialog_enu" src="behavior_1/ExampleDialog/ExampleDialog_enu.top" topicName="ExampleDialog" language="en_US" />
