@@ -20,24 +20,34 @@ concept:(investors) [private investors]
 
 
 # Start application
-proposal: %start \rspd=90\ $html="index.html" ~hello  \pau=300\ I am Pepper \pau=300\ and I am representing the U X botz team at Tampere University. 
+u:(e:onStart) ^gotoReactivate(start) \rspd=90\ $html="index.html" ~hello  \pau=300\ I am Pepper \pau=300\ and I am representing the U X botz team at Tampere University. 
 \pau=300\ What are you doing to make sure your plastic is being recycled? \pau=300\ well, \pau=300\ plastic pollution is a huge problem \pau=300\ 
 ^start(boston_animation_library/Stand/little_laugh) ^wait(boston_animation_library/Stand/little_laugh)\pau=300\  
-^gotoReactivate(startsurvey)
-u:(e:onStart) ^gotoReactivate(start)
-u:(e:orientation/click $orientation/click==startSurvey)
+^gotoReactivate(startSurvey)
+
+#u:(e:orientation/click $orientation/click==startSurvey) ^gotoReactivate(start)
+
+# proposal: %start \rspd=90\ $html="index.html" ~hello  \pau=300\ I am Pepper \pau=300\ and I am representing the U X botz team at Tampere University. 
+# \pau=300\ What are you doing to make sure your plastic is being recycled? \pau=300\ well, \pau=300\ plastic pollution is a huge problem \pau=300\ 
+# ^start(boston_animation_library/Stand/little_laugh) ^wait(boston_animation_library/Stand/little_laugh)\pau=300\  
+# ^gotoReactivate(startsurvey)
 
 
 # Start survey
-proposal: %startSurvey $html="startsurvey.html" Hello, would you like to take part, in an informative survey. \pau=1000\ It will take only about 6 minutes. 
-\pau=1000\ 
+proposal: %startSurvey \rspd=90\ $html="startsurvey.html" Hello, would you like to take part, in an informative 
+survey. \pau=1000\ It will take only about 6 minutes. \pau=1000\
 
 # Yes
-u:(yes) gotoReactivate(recycle)
+u:(yes) ^gotoReactivate(recycle)
 u:(e:orientation/click $orientation/click==surveyYes) ^gotoReactivate(recycle)
 # No
-u:(yes) gotoReactivate(surveyNo)
+u:(yes) ^gotoReactivate(surveyNo)
 u:(e:orientation/click $orientation/click==surveyNo) ^gotoReactivate(surveyNo)
+
+
+# Recycling
+proposal: %recycle $html="recycle.html" Awesome! Let’s start. \pau=1000\ I am interested in your thoughts, on, environmental issues. \pau=1000\ 
+My first question is, do you recycle plastics. \pau=1000\
 
 
 # Are you sure you want to quit?
@@ -55,9 +65,7 @@ u:(e:orientation/click $orientation/click==sureYes) Alright. \pau=5000\ ^gotoRea
  proposal: %sadface $html="sadface.html" 
 
 
-# Recycling
-proposal: %recycle $html="recycle.html" Awesome! Let’s start. \pau=1000\ I am interested in your thoughts, on, environmental issues. \pau=1000\ $html="recycle.html" 
-My first question is, do you recycle plastics. \pau=1000\
+
 
 # Yes
 proposal: %recycleYes \rspd=90\ Awesome! \pau=1000\ Plastic recycling, is important. I will tell you more about why that is. \pau=1000\ 
@@ -79,7 +87,7 @@ proposal: %recycleYes \rspd=90\ Awesome! \pau=1000\ Plastic recycling, is import
 # Microplastic dialogs
 # Part 1
 Proposal: %microplastics1 $html="microplastics1.html" Did you know that plastics can be found in small sizes, known as microplastics.\pau=800\ 
-Microplastics are very small particles of plastic material \pau=400\ like this. \pau=1000\ ^gotoReactivate/microplastics2)
+Microplastics are very small particles of plastic material \pau=400\ like this. \pau=1000\ ^gotoReactivate(microplastics2)
 # Part 2
 proposal: %microplastics2 $html="microplastics2.html" Microplastics are created by the plastic industry. \pau=800\ Did you know, 
 they are used in some cosmetics, \pau=400\ detergents, \pau=400\ cleaning products, \pau=400\ paints, \pau=400\ even synthetic clothing. \pau=1000\ 
@@ -181,11 +189,11 @@ u:(e:orientation/click $orientation/click==pledge3) you have chosen to refuse pr
 the environment \pau=1000\ thank you for making a pledge today! \pau=800\   ^gotoReactivate(end)
 # Pledge 4
 u:(e:orientation/click $orientation/click==pledge4)you have chosen to pass this information to other people \pau=800\ this is very important, 
-because people need to know more about the problems related to plastics \pau=800\ thank you for making a pledge today! pau=800\   ^gotoReactivate(end)
+because people need to know more about the problems related to plastics \pau=800\ thank you for making a pledge today! \pau=800\   ^gotoReactivate(end)
 
 
 # End
-Proposal: %end html="end.html" Thank you for participating this survey \pau=800\ have a nice day \pau=5000\ gotoReactivate(start)
+Proposal: %end $html="end.html" Thank you for participating this survey \pau=800\ have a nice day \pau=5000\ ^gotoReactivate(start)
 \pau=1000\
 
 
