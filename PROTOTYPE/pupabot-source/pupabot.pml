@@ -111,7 +111,7 @@
         <File name="surveyno" src="html/surveyno.html" />
     </Resources>
     <Topics>
-        <Topic name="ExampleDialog_enu" src="behavior_1/ExampleDialog/ExampleDialog_enu.top" topicName="" language="" />
+        <Topic name="ExampleDialog_enu" src="behavior_1/ExampleDialog/ExampleDialog_enu.top" topicName="ExampleDialog" language="en_US" />
     </Topics>
     <IgnoredPaths />
     <Translations auto-fill="en_US">

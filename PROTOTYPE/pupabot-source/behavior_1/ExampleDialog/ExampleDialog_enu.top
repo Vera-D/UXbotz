@@ -18,186 +18,162 @@ concept:(responsibleNations) [nations let happen]
 concept:(nations) ["all nations" world]
 concept:(investors) [private investors]
 
+# ======================================================================================================================================================================= 
+# Proposals
+# =======================================================================================================================================================================
 
 # Start application
-u:(e:onStart) ^gotoReactivate(start) \rspd=90\ $html="index.html" ~hello  \pau=300\ I am Pepper \pau=300\ and I am representing the U X botz team at Tampere University. 
-\pau=300\ What are you doing to make sure your plastic is being recycled? \pau=300\ well, \pau=300\ plastic pollution is a huge problem \pau=300\ 
-^start(boston_animation_library/Stand/little_laugh) ^wait(boston_animation_library/Stand/little_laugh)\pau=300\  
-^gotoReactivate(startSurvey)
-
-#u:(e:orientation/click $orientation/click==startSurvey) ^gotoReactivate(start)
-
-# proposal: %start \rspd=90\ $html="index.html" ~hello  \pau=300\ I am Pepper \pau=300\ and I am representing the U X botz team at Tampere University. 
-# \pau=300\ What are you doing to make sure your plastic is being recycled? \pau=300\ well, \pau=300\ plastic pollution is a huge problem \pau=300\ 
-# ^start(boston_animation_library/Stand/little_laugh) ^wait(boston_animation_library/Stand/little_laugh)\pau=300\  
-# ^gotoReactivate(startsurvey)
-
+u:(e:onStart) %start \rspd=90\ $html="index.html" ~hello  \pau=300\ I am Pepper \pau=300\ and this is a test.
+^start(boston_animation_library/Stand/little_laugh) ^wait(boston_animation_library/Stand/little_laugh)\pau=300\ ^goto(startsurvey)
 
 # Start survey
-proposal: %startSurvey \rspd=90\ $html="startsurvey.html" Hello, would you like to take part, in an informative 
+proposal: %startsurvey $html="startsurvey.html" Hello, would you like to take part, in an informative 
 survey. \pau=1000\ It will take only about 6 minutes. \pau=1000\
+# Taking survey
 
-# Yes
-u:(yes) ^gotoReactivate(recycle)
-u:(e:orientation/click $orientation/click==surveyYes) ^gotoReactivate(recycle)
-# No
-u:(yes) ^gotoReactivate(surveyNo)
-u:(e:orientation/click $orientation/click==surveyNo) ^gotoReactivate(surveyNo)
+# User takes survey -> recycling question
+    u1:(yes) ^gotoReactivate(recycle)
+    u1:(e:orientation/click $orientation/click==1) ^goto(recycle)
+    # User doesn't take survey -> Are you sure
+    u1:(no) ^gotoReactivate(surveyNo)
+    u1:(e:orientation/click $orientation/click==0) ^goto(surveyNo)
 
-
-# Recycling
+# Recycle question
 proposal: %recycle $html="recycle.html" Awesome! Let’s start. \pau=1000\ I am interested in your thoughts, on, environmental issues. \pau=1000\ 
 My first question is, do you recycle plastics. \pau=1000\
 
+# Go to problem when user recycles
+proposal: %recycleYes \rspd=90\ Awesome! \pau=1000\ Plastic recycling, is important. I will tell you more about why that is. \pau=1000\ ^goto(problem)
+
+# Go to problem when user does not recycle
+proposal: %recycleNo \rspd=90\ Allright. No worries. I will tell you more about plastic. \pau=1000\ ^goto(problem)
+# Do you recycle?
+    # Yes
+    u1:(yes) ^goto(recycleYes)
+    u1:(e:orientation/click $orientation/click==1) ^goto(recycleYes)
+    # No
+    u1:(no) ^goto(recycleNo)
+    u1:(e:orientation/click $orientation/click==0) ^goto(recycleNo)
 
 # Are you sure you want to quit?
 proposal: %surveyNo $html="surveyno.html" Are you sure? \pau=1500\ This won’t take much of your time, and you can learn new things. \pau=1000\
-
-#Yes
-u:(yes) Alright. \pau=5000\ Alright. \pau=5000\ ^gotoReactivate(sadface)
-u:(e:orientation/click $orientation/click==sureYes) Alright. \pau=5000\ ^gotoReactivate(sadface)
-#No
-u:(yes) Nice! \pau=5000\ ^gotoReactivate(recycle)
-u:(e:orientation/click $orientation/click==sureYes) Alright. \pau=5000\ ^gotoReactivate(recycle)
-
+# Quitting survey
+    #Yes
+    u1:(yes) Alright. \pau=5000\ ^goto(sadface)
+    u1:(e:orientation/click $orientation/click==1) Alright. \pau=5000\ ^goto(sadface)
+    #No
+    u1:(no) Nice! Let's continue! \pau=5000\ ^goto(recycle)
+    u1:(e:orientation/click $orientation/click==0) Nice! Let's continue! \pau=5000\ ^goto(recycle)
 
 # Sad face
- proposal: %sadface $html="sadface.html" 
+ proposal: %sadface $html="sadface.html" \pau=1000\ ^goto(start)
 
-
-
-
-# Yes
-proposal: %recycleYes \rspd=90\ Awesome! \pau=1000\ Plastic recycling, is important. I will tell you more about why that is. \pau=1000\ 
-^gotoReactivate(problem)
- u:(yes) ^gotoReactivate(recycleYes)
- u:(e:orientation/click $orientation/click==recycleYes) ^gotoReactivate(recycleYes)
- # No
- proposal: %recycleNo \rspd=90\ Allright. No worries. I will tell you more about plastic. \pau=1000\ ^gotoReactivate(problem)
- u:(yes) ^gotoReactivate(recycleNo)
- u:(e:orientation/click $orientation/click==recycleNo) ^gotoReactivate(recycleNo)
-
-
- # Problem
+# Problem
  proposal: %problem $html="problem.html" As you must already know, plastic is an essential part of our economy. \pau=800\ 
  Yet, plastic can have a serious effect on our health, and our environment. \pau=800\ Plastic pollution has become one of the most 
- pressing environmental issues. \pau=1000\
+ pressing environmental issues. \pau=1000\ ^goto(microplastics6)
 
-
-# Microplastic dialogs
-# Part 1
-Proposal: %microplastics1 $html="microplastics1.html" Did you know that plastics can be found in small sizes, known as microplastics.\pau=800\ 
-Microplastics are very small particles of plastic material \pau=400\ like this. \pau=1000\ ^gotoReactivate(microplastics2)
-# Part 2
-proposal: %microplastics2 $html="microplastics2.html" Microplastics are created by the plastic industry. \pau=800\ Did you know, 
-they are used in some cosmetics, \pau=400\ detergents, \pau=400\ cleaning products, \pau=400\ paints, \pau=400\ even synthetic clothing. \pau=1000\ 
-^gotoReactivate(microplastics3)
-# Part 3
-proposal: %microplastics3 $html="microplastics3.html" Some microplastics are formed unintentionally, when wasted plastics break down in the environment. 
-\pau=1000\ ^gotoReactivate(microplastics4)
-# Part 4
-proposal: %microplastics4 $html="microplastics4.html" Microplastics are breaking down further, into smaller and smaller pieces. \pau=800\ 
-Plastic microfibers have been found in, drinking water, and even drifting through the air. \pau=1000\ ^gotoReactivate(microplastics5)
-# Part 5
-proposal: %microplastics5 $html="microplastics5.html" Microplastics have spread everywhere on Earth. \pau=800\ 
-They can even be found in the snows of Arctic. \pau=1000\ ^gotoReactivate(microplastics6)
+# # Microplastics
+# # Part 1
+# Proposal: %microplastics1 $html="microplastics1.html" Did you know that plastics can be found in small sizes, known as microplastics.\pau=800\ 
+# Microplastics are very small particles of plastic material \pau=400\ like this. \pau=1000\ ^goto(microplastics2)
+# # Part 2
+# proposal: %microplastics2 $html="microplastics2.html" Microplastics are created by the plastic industry. \pau=800\ Did you know, 
+# they are used in some cosmetics, \pau=400\ detergents, \pau=400\ cleaning products, \pau=400\ paints, \pau=400\ even synthetic clothing. \pau=1000\ 
+# ^goto(microplastics3)
+# # Part 3
+# proposal: %microplastics3 $html="microplastics3.html" Some microplastics are formed unintentionally, when wasted plastics break down in the environment. 
+# \pau=1000\ ^goto(microplastics4)
+# # Part 4
+# proposal: %microplastics4 $html="microplastics4.html" Microplastics are breaking down further, into smaller and smaller pieces. \pau=800\ 
+# Plastic microfibers have been found in, drinking water, and even drifting through the air. \pau=1000\ ^goto(microplastics5)
+# # Part 5
+# proposal: %microplastics5 $html="microplastics5.html" Microplastics have spread everywhere on Earth. \pau=800\ 
+# They can even be found in the snows of Arctic. \pau=1000\ ^goto(microplastics6)
 # Part 6
 proposal: %microplastics6 $html="microplastics6.html" Some plastics contain hazardous chemicals, that can have a negative impact on nature, 
-or human health. \pau=1000\ ^gotoReactivate(microplasticsQuestion)
-
+or human health. \pau=1000\ ^goto(microplasticsQuestion)
 
 # Microplastics question
 proposal: %microplasticsQuestion $html="microplastics-question.html" What concerns you most, about microplastics? \pau=1000\
 
 # DangersToHealth
-Proposal: %danger This is a good thing to be concerned about. \pau=800\ There is still much we don’t know, about health issues related to plastics. 
-\pau=800\ After all, most plastic has been produced only in the past 15 years. \pau=1000\ Let’s move on. \pau=1000\ ^gotoReactivate(carbagepatch)
-u:(e:orientation/click $orientation/click==danger) ^gotoReactivate(danger)
-u:(danger) ^gotoReactivate(danger)
-# Environmental pollution
-Proposal: %pollution Environmental pollution is a serious concern, \pau=400\ How, are we ever going to get rid of all that plastic, in the environment. 
-\pau=1000\ \pau=1000\ Let’s move on. \pau=1000\ ^gotoReactivate(carbagepatch)
-u:(e:orientation/click $orientation/click==pollution) ^gotoReactivate(pollution)
-u:(pollution) ^gotoReactivate(pollution)
-# Both TODO dialog!!!!
-u:(e:orientation/click $orientation/click==both) ^gotoReactivate(both)
-u:(pollution) ^gotoReactivate(pollution)
+    u1:(e:orientation/click $orientation/click==1) This is a good thing to be concerned about. \pau=800\ There is still much we don’t know, about health issues related to plastics. 
+    \pau=800\ After all, most plastic has been produced only in the past 15 years. \pau=1000\ Let’s move on. \pau=1000\ ^goto(carbagepatch)
+    u1:(danger) This is a good thing to be concerned about. \pau=800\ There is still much we don’t know, about health issues related to plastics. 
+    \pau=800\ After all, most plastic has been produced only in the past 15 years. \pau=1000\ Let’s move on. \pau=1000\ ^goto(carbagepatch)
 
+    # Environmental pollution
+    u1:(e:orientation/click $orientation/click==2) Environmental pollution is a serious concern, \pau=400\ How, are we ever going to get rid of all that plastic, in the environment. 
+    \pau=1000\ \pau=1000\ Let’s move on. \pau=1000\ ^goto(carbagepatch)
+    u1:(pollution) Environmental pollution is a serious concern, \pau=400\ How, are we ever going to get rid of all that plastic, in the environment. 
+    \pau=1000\ \pau=1000\ Let’s move on. \pau=1000\ ^goto(carbagepatch)
+
+    # Both 
+    u1:(e:orientation/click $orientation/click==3) Environmental pollution and health issues are serious concerns, \pau=400\ How, are we ever going to get rid of all that plastic, in the environment and in our bodies. ^goto(carbagepatch)
+    u1:(both) Environmental pollution and health issues are serious concerns, \pau=400\ How, are we ever going to get rid of all that plastic, in the environment and in our bodies.
+    ^goto(carbagepatch)
 
 # Garbage patches
-Proposal: %garbagepatch $html="carbagepatch.html" in the North Pacific Ocean, garbage and plastic debris, has accumulated into something called 
+proposal: %garbagepatch $html="carbagepatch.html" in the North Pacific Ocean, garbage and plastic debris, has accumulated into something called 
 \pau=300\ The Great Pacific Garbage Patch \pau=900\ It spans from North America to Japan \pau=800\ And, because this vortex of trash, is so far from any 
-coast, no nation will take responsibility, or provide funding, to clean it up. \pau=1000\ ^gotoReactivate(cleanup)
+coast, no nation will take responsibility, or provide funding, to clean it up. \pau=1000\ ^goto(cleanup)
 
-
-# Clean up dialog
-Proposal: %cleanup  $html="cleanup.html" however, there is a project that has received funding \pau=900\ the Ocean Clean Up  project aims 
+# Clean up
+proposal: %cleanup  $html="cleanup.html" however, there is a project that has received funding \pau=900\ the Ocean Clean Up  project aims 
 to clean 90 % of ocean plastic \pau=900\ they have designed a system that catches plastic from the ocean with a floating barrier \pau=1000\
-^gotoReactivate(cleanupQuestion)
-
+^goto(cleanupQuestion)
 
 # Cleanup question
 proposal: %cleanupQuestion $html="cleanup-question.html" Now \pau=700\ in your opinion \pau=600\who, should pay for these kinds of projects 
 \pau=1000\ \pau=1000\
-
-# Responsible nations
-Proposal: %responsibleNations Indeed, why aren’t the nations held responsible \pau=1000\ ^gotoReactivate(suggestions)
-u:(e:orientation/click $orientation/click==danger) ^gotoReactivate(responsibleNations)
-u:(responsibleNations) ^gotoReactivate(responsibleNations)
-# All nations
-Proposal: %nations Indeed, why don’t all nations contribute to clean up the ocean \pau=1000\ ^gotoReactivate(suggestions)
-u:(e:orientation/click $orientation/click==pollution) ^gotoReactivate(nations)
-u:(nations) ^gotoReactivate(nations)
-# Private investors
-Proposal: %investors Good idea, private investors can help \pau=1000\ ^gotoReactivate(suggestions)
-u:(e:orientation/click $orientation/click==both) ^gotoReactivate(investors)
-u:(pollution) ^gotoReactivate(investors)
-
+    # Responsible nations
+    u:(e:orientation/click $orientation/click==1) Indeed, why aren’t the nations held responsible \pau=1000\ ^goto(suggestions)
+    u:(responsibleNations) Indeed, why aren’t the nations held responsible \pau=1000\ ^goto(suggestions)
+    # All nations
+    u:(e:orientation/click $orientation/click==2) Indeed, why don’t all nations contribute to clean up the ocean \pau=1000\ ^goto(suggestions)
+    u:(nations) Indeed, why don’t all nations contribute to clean up the ocean \pau=1000\ ^goto(suggestions)
+    # Private investors
+    u:(e:orientation/click $orientation/click==3) Good idea, private investors can help \pau=1000\ ^goto(suggestions)
+    u:(pollution) Good idea, private investors can help \pau=1000\ ^goto(suggestions)
 
 # Suggestions
-Proposal: %suggestions $html="suggestions.html" 
-
-# Recycles already
-Proposal: %suggestionsYes Now that I have told you about the problems with plastic \pau=600\ I have some suggestions that you can do to help \pau=800\ 
-my suggestions are, for example, you can choose products, that do not use so much  plastic wrapping \pau=800\ Consider the life cycle of a product, 
-and make sure, it does not end up as waste \pau=800\ and remember, of course, to keep recycling, as you already have done \pau=1000\ 
-^gotoReactivate(pledges)
-u:(e:orientation/click $orientation/click==1) ^gotoReactivate(suggestionsYes)
-# Does not recycle
-Proposal: %suggestionsNo Now that I have told you about the problems with plastic \pau=600\ I have some suggestions that you can do to help \pau=800\ my suggestions are, 
-for example, you can choose products, that do not use so much  plastic wrapping \pau=800\ Consider the life cycle of a product, and make sure, 
-it does not end up as waste \pau=800\ I also suggest you start recycling plastics \pau=1000\
-^gotoReactivate(pledges)
-u:(e:orientation/click $orientation/click==0) ^gotoReactivate(suggestionsNo)
-
+Proposal: %suggestions $html="suggestions.html"
+    # Recycles already
+    u1:(e:orientation/click $orientation/click==1) Now that I have told you about the problems with plastic \pau=600\ I have some suggestions that you can do to help \pau=800\ 
+    my suggestions are, for example, you can choose products, that do not use so much  plastic wrapping \pau=800\ Consider the life cycle of a product, 
+    and make sure, it does not end up as waste \pau=800\ and remember, of course, to keep recycling, as you already have done \pau=1000\  ^goto(pledges)
+    # Does not recycle
+    u1:(e:orientation/click $orientation/click==0) Now that I have told you about the problems with plastic \pau=600\ I have some suggestions that you can do to help \pau=800\ my suggestions are, 
+    for example, you can choose products, that do not use so much  plastic wrapping \pau=800\ Consider the life cycle of a product, and make sure, 
+    it does not end up as waste \pau=800\ I also suggest you start recycling plastics \pau=1000\ ^goto(pledges)
 
 # Pledges
 Proposal: %pledges $html="pledges.html" please, would you make a pledge today \pau=800\ here are options \pau=800\ please choose, 
 and commit to one! \pau=800\ Select your pledge from my tablet below \pau=1000\
-
-# Pledge 1
-u:(e:orientation/click $orientation/click==pledge1) you have chosen to start recycling plastic \pau=400\ this is great \pau=800\ you should be able 
-to find a plastic recycling point near your house \pau=800\ if there isn’t one, take steps to request one \pau=1000\ Thank you for making a pledge today! 
-\pau=800\ ^gotoReactivate(end)
-# Pledge 2
-u:(e:orientation/click $orientation/click==pledge2)
-you have chosen, to refuse single-use plastics and packing. Thank you! \pau=800\ since the customer is always right, industry will eventually have to 
-take more steps, to offer alternatives to single-use plastics. \pau=1000\ thank you for making a pledge today! \pau=800\ 
- ^gotoReactivate(end)
-# Pledge 3
-u:(e:orientation/click $orientation/click==pledge3) you have chosen to refuse products, that include micro plastics\pau=800\ this is a good action for 
-the environment \pau=1000\ thank you for making a pledge today! \pau=800\   ^gotoReactivate(end)
-# Pledge 4
-u:(e:orientation/click $orientation/click==pledge4)you have chosen to pass this information to other people \pau=800\ this is very important, 
-because people need to know more about the problems related to plastics \pau=800\ thank you for making a pledge today! \pau=800\   ^gotoReactivate(end)
-
+    # Pledge 1
+    u1:(e:orientation/click $orientation/click==1) you have chosen to start recycling plastic \pau=400\ this is great \pau=800\ you should be able 
+    to find a plastic recycling point near your house \pau=800\ if there isn’t one, take steps to request one \pau=1000\ Thank you for making a pledge today! 
+    \pau=800\ ^goto(end)
+    # Pledge 2
+    u1:(e:orientation/click $orientation/click==2)
+    you have chosen, to refuse single-use plastics and packing. Thank you! \pau=800\ since the customer is always right, industry will eventually have to 
+    take more steps, to offer alternatives to single-use plastics. \pau=1000\ thank you for making a pledge today! \pau=800\ 
+    ^goto(end)
+    # Pledge 3
+    u1:(e:orientation/click $orientation/click==3) you have chosen to refuse products, that include micro plastics\pau=800\ this is a good action for 
+    the environment \pau=1000\ thank you for making a pledge today! \pau=800\   ^goto(end)
+    # Pledge 4
+    u1:(e:orientation/click $orientation/click==4) you have chosen to pass this information to other people \pau=800\ this is very important, 
+    because people need to know more about the problems related to plastics \pau=800\ thank you for making a pledge today! \pau=800\   ^goto(end)
 
 # End
-Proposal: %end $html="end.html" Thank you for participating this survey \pau=800\ have a nice day \pau=5000\ ^gotoReactivate(start)
-\pau=1000\
+Proposal: %end $html="end.html" Thank you for participating this survey \pau=800\ have a nice day \pau=5000\ ^goto(start)
+
+# =======================================================================================================================================================================
 
 
- 
+
 
 
 
