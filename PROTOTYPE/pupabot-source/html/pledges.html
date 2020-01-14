@@ -22,19 +22,19 @@
 		</h1>
     </header>
     <div class="form-container">
-        <div class="button-wide" style="font-size: 24px;" onclick="submitAnswer(1)">
+        <div class="button-wide" style="font-size: 24px;" onclick="submitAnswer7()">
             I will start recycling plastic 
         </div>
         <div class="row-divider"></div>
-        <div class="button-wide" style="font-size: 24px;" onclick="submitAnswer(2)">
+        <div class="button-wide" style="font-size: 24px;" onclick="submitAnswer8()">
             I will avoid products with single-use plastic packaging
         </div>
         <div class="row-divider"></div>
-        <div class="button-wide" style="font-size: 24px;" onclick="submitAnswer(3)">
+        <div class="button-wide" style="font-size: 24px;" onclick="submitAnswer9()">
             I will boycott products that contain microplastics
         </div>
         <div class="row-divider"></div>
-        <div class="button-wide" style="font-size: 24px;" onclick="submitAnswer(4)">
+        <div class="button-wide" style="font-size: 24px;" onclick="submitAnswer10()">
             I will increase awareness by having discussions with others
         </div>
 	</div>
@@ -43,19 +43,31 @@
 			var session = new QiSession();
 			var audio = new Audio('../change_screen.ogg');
 
-			function submitAnswer(answer){
+			function submitAnswer7(){
 				audio.play();
 				session.service('ALMemory').done(function(ALMemory) {
-				ALMemory.raiseEvent("orientation/click", answer);
+				ALMemory.raiseEvent("orientation/click", 7);
+				});
+			}
+			function submitAnswer8(){
+				audio.play();
+				session.service('ALMemory').done(function(ALMemory) {
+				ALMemory.raiseEvent("orientation/click", 8);
+				});
+			}
+			function submitAnswer9(){
+				audio.play();
+				session.service('ALMemory').done(function(ALMemory) {
+				ALMemory.raiseEvent("orientation/click", 9);
+				});
+			}
+			function submitAnswer10(){
+				audio.play();
+				session.service('ALMemory').done(function(ALMemory) {
+				ALMemory.raiseEvent("orientation/click", 10);
 				});
 			}
 			
-			function exit(){
-				audio.play();
-				session.service('ALMemory').done(function(ALMemory) {
-				ALMemory.raiseEvent("orientation/landing_page","landing_page.html");
-				});
-			}
 </script>
 </body>
 </html>

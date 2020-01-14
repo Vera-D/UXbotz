@@ -23,9 +23,9 @@
 	</header>
 
 		<div class="button-container">
-			<div onclick="submitAnswer(1)" class=button>Yes</div>
+			<div onclick="submitYes()" class=button>Yes</div>
 			<div class="button-divider"></div>
-			<div onclick="submitAnswer(0)" class=button>No</div>
+			<div onclick="submitNo()" class=button>No</div>
 		</div>	
 
 
@@ -33,19 +33,19 @@
 			var session = new QiSession();
 			var audio = new Audio('../change_screen.ogg');
 
-			function submitAnswer(answer){
+			function submitYes(){
 				audio.play();
 				session.service('ALMemory').done(function(ALMemory) {
-				ALMemory.raiseEvent("orientation/click", answer);
+				ALMemory.raiseEvent("orientation/click", 0);
+				});
+			}
+			function submitNo(){
+				audio.play();
+				session.service('ALMemory').done(function(ALMemory) {
+				ALMemory.raiseEvent("orientation/click", 1);
 				});
 			}
 			
-			function exit(){
-				audio.play();
-				session.service('ALMemory').done(function(ALMemory) {
-				ALMemory.raiseEvent("orientation/landing_page","landing_page.html");
-				});
-			}
 </script>
 </body>
 </html>

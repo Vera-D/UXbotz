@@ -22,15 +22,15 @@
 		</h1>
     </header>
     <div class="form-container">
-        <div class="button-wide" onclick="submitAnswer(1)">
+        <div class="button-wide" onclick="submitAnswer4()">
             Dangers to health
         </div>
         <div class="row-divider"></div>
-        <div class="button-wide" onclick="submitAnswer(2)">
+        <div class="button-wide" onclick="submitAnswer5()">
             Environmental pollution
         </div>
         <div class="row-divider"></div>
-        <div class="button-wide" onclick="submitAnswer(3)">
+        <div class="button-wide" onclick="submitAnswer6()">
             Both of the above
         </div>
         <div class="row-divider"></div>
@@ -40,19 +40,25 @@
 			var session = new QiSession();
 			var audio = new Audio('../change_screen.ogg');
 
-			function submitAnswer(answer){
+			function submitAnswer4(){
 				audio.play();
 				session.service('ALMemory').done(function(ALMemory) {
-				ALMemory.raiseEvent("orientation/click", answer);
+				ALMemory.raiseEvent("orientation/click", 4);
 				});
 			}
-			
-			function exit(){
+			function submitAnswer5(){
 				audio.play();
 				session.service('ALMemory').done(function(ALMemory) {
-				ALMemory.raiseEvent("orientation/landing_page","landing_page.html");
+				ALMemory.raiseEvent("orientation/click", 5);
 				});
 			}
+			function submitAnswer6(){
+				audio.play();
+				session.service('ALMemory').done(function(ALMemory) {
+				ALMemory.raiseEvent("orientation/click", 6);
+				});
+			}			
+
 </script>
 </body>
 </html>
