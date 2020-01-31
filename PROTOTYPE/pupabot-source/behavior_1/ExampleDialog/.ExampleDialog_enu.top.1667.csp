@@ -91,7 +91,7 @@ proposal: %microplasticsQuestion $html="microplastics-question.html"  \pau=300\ 
     u1:(both)  \pau=300\ You said both \pau=400\ Environmental pollution and health issues are serious concerns, \pau=400\ How, are we ever going to get rid of all that plastic, in the environment and in our bodies. ^goto(pledges)
 
 # End
-proposal: %end $html="end.html"  \pau=300\ Thank you for participating, I learned alot from you \pau=800\ have a nice day \pau=5000\ ^goto(start)
+proposal: %end $html="end.html"  \pau=300\ Thank you for participating,  \pau=300\ please request your gift card from Vera OR SALLA \pau=800\ have a nice day \pau=5000\ ^goto(start)
 
 # Pledges
 proposal: %pledges $html="pledges.html"  \pau=300\ Please, make a pledge today \pau=800\ here are some ideas \pau=800\ please choose, and commit to one! \pau=800\ You can select your pledge from my tablet below.  \pau=1000\

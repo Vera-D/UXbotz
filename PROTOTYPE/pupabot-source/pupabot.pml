@@ -109,6 +109,7 @@
         <File name="survey1" src="html/survey1.html" />
         <File name="survey1view2" src="html/survey1view2.html" />
         <File name="surveyno" src="html/surveyno.html" />
+        <File name="icons8-repeat-64" src="html/images/icons8-repeat-64.png" />
     </Resources>
     <Topics>
         <Topic name="ExampleDialog_enu" src="behavior_1/ExampleDialog/ExampleDialog_enu.top" topicName="ExampleDialog" language="en_US" />
